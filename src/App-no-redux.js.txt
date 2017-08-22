@@ -1,0 +1,67 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+export class TodoAdd extends Component {
+  state = {
+    value: ''
+  }
+  updateValue = ({ target: { value } }) => this.setState({ value });
+  addTodo = () => this.props.addTodo(this.state.value);
+  render() {
+    return (
+      <div>
+        <input value={this.state.value} onChange={this.updateValue}/>
+        <button onClick={this.addTodo}></button>
+      </div>
+    );
+  }
+}
+
+export class TodoList extends Component {
+  removeTodo = (todo) => () => this.props.removeTodo(todo);
+
+  render() {
+    const { todos } = this.props;
+    return (
+      <ul>
+        {todos.map(todo => <li key={todo.id}>{todo.text} <button onClick={this.removeTodo(todo)}></button></li>)}
+      </ul>
+    );
+  }
+}
+
+class App extends Component {
+  state = { todos: [
+    {
+    id: 1,
+      text: 'Todo 1'
+    },
+    {
+      id: 2,
+        text: 'Todo 2'
+      }
+  ]}
+
+  addTodo = (text) => this.setState({ todos: [...this.state.todos, { id: +new Date, text }] });
+
+  removeTodo = ({ id }) => this.setState({ todos: this.state.todos.filter((todo) =>  todo.id !== id)})
+
+  render() {
+    const { todos } = this.state;
+    return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Welcome to React</h2>
+        </div>
+        <p className="App-intro">
+          <TodoAdd addTodo={this.addTodo}/>
+          <TodoList todos={todos}  removeTodo={this.removeTodo}/>
+        </p>
+      </div>
+    );
+  }
+}
+
+export default App;

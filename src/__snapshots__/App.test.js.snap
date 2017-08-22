@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render App 1`] = `<Connect(App) />`;
+
+exports[`render TodoAdd 1`] = `
+<div>
+  <input
+    onChange={[Function]}
+  />
+  <button
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`render TodoAdd 2`] = `
+<div>
+  <input
+    onChange={[Function]}
+  />
+  <button
+    onClick={[Function]}
+  />
+</div>
+`;
